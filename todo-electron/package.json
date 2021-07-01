@@ -1,0 +1,19 @@
+{
+  "name": "tasky",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch index.js --exec electron .",
+    "build:exe": "electron-packager . taskyapp --out taskyapp --arch=x64 --overwrite --ignore=node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^13.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
