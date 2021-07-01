@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Layout, Menu, Button, List } from 'antd'
+import { Layout, Menu, Button, List, Skeleton } from 'antd'
 import './App.css'
 import moment from 'moment'
 import { PlusOutlined } from '@ant-design/icons'
 
 const App = () => {
   const [list, setList] = useState([])
+  const [status, setStatus] = useState(0)
   useEffect(()=>{
     setList([...list,{title:'123',date:moment().format()}])
     console.log(list)
@@ -39,7 +40,6 @@ const App = () => {
           { textAlign: 'center' }
         }>
           <Button type="primary" shape="round" icon={<PlusOutlined />}>新建</Button>
-
         </div>
       </Layout.Sider>
       <Layout.Content>
@@ -55,8 +55,19 @@ const App = () => {
             dataSource={list}
             renderItem={item => (
               <List.Item
-                actions={[<a key="list-loadmore-edit">完成</a>, <a key="list-loadmore-more">删除</a>]}
-              >{item.title}</List.Item>
+                actions={
+                  status === 0 ? [<a key="list-loadmore-edit">完成</a>, <a key="list-loadmore-more">删除</a>] : []
+                }
+              >
+                <Skeleton avatar title={false} loading={item.loading} active>
+                  <List.Item.Meta
+                    title={ item.title }
+                  />
+                  {
+                    status === 1 ? <div >content</div> : null
+                  }
+                </Skeleton>
+              </List.Item>
             )}
           />
           <div>你已经对自己信守承诺 {list.length}次，加油！</div>
