@@ -2,13 +2,15 @@ import React from 'react'
 import { Menu, Button } from 'antd'
 import moment from 'moment'
 import { PlusOutlined } from '@ant-design/icons'
+import { textCenter } from '../commons/style'
 
-const Left = () => {
+const Left = (props) => {
+  const onClick = () => {
+    props.changeStatus(2)
+  }
   return (
     <div>
-      <div style={
-        { textAlign: 'center' }
-      }>
+      <div style={textCenter}>
         {moment().format('YYYY-MM-DD')}
       </div>
       <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
@@ -19,10 +21,8 @@ const Left = () => {
           已完成
         </Menu.Item>
       </Menu>
-      <div style={
-        { textAlign: 'center' }
-      }>
-        <Button type="primary" shape="round" icon={<PlusOutlined/>}>新建</Button>
+      <div style={textCenter}>
+        <Button type="primary" shape="round" icon={<PlusOutlined/>} onClick={onClick}>新建</Button>
       </div>
     </div>
   )

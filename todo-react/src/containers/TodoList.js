@@ -2,18 +2,22 @@ import React, { useState } from 'react'
 import { List, Skeleton } from 'antd'
 
 const TodoList = (props) => {
-  const [status, setStatus] = useState(0)
-  const { list } = props
+  const { list, status } = props
+  const complete = item => {
+    props.changeStatus(1)
+  }
+  const removeItem = item => {}
+  console.log(status)
   return (
     <div>
       <List
-        className="demo-loadmore-list"
         itemLayout="horizontal"
         dataSource={list}
         renderItem={item => (
           <List.Item
             actions={
-              status === 0 ? [<a key="list-loadmore-edit">完成</a>, <a key="list-loadmore-more">删除</a>] : []
+              status === 0 ? [<a key="list-loadmore-edit" onClick={complete(item)}>完成</a>,
+                <a key="list-loadmore-more" onClick={removeItem}>删除</a>] : []
             }
           >
             <Skeleton avatar title={false} loading={item.loading} active>
