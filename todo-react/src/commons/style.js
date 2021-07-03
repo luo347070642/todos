@@ -7,15 +7,17 @@ const siteLayoutBackground = {
   padding: '24px'
 }
 const marginAuto = {
-  width: '50%',
+  width: '80%',
   margin: '0 auto'
 }
 const wrapperCol = { offset: 10, span: 14 }
+const paddingLR20 = { padding: '0 20%' }
 export {
   fixHeight,
   background,
   textCenter,
   siteLayoutBackground,
   marginAuto,
-  wrapperCol
+  wrapperCol,
+  paddingLR20
 }

@@ -1,28 +1,40 @@
-import React, { useState } from 'react'
-import { List, Skeleton } from 'antd'
+import React from 'react'
+import { Button, List, Skeleton } from 'antd'
+import { paddingLR20 } from '../commons/style'
 
-const TodoList = (props) => {
-  const { list, status } = props
+const TodoList = props => {
+  const { list, status, changeStatus, removeListItem } = props
   const complete = item => {
-    props.changeStatus(1)
+    changeStatus(1)
   }
-  const removeItem = item => {}
-  console.log(status)
   return (
-    <div>
+    <div style={paddingLR20}>
       <List
-        itemLayout="horizontal"
+        itemLayout='horizontal'
         dataSource={list}
         renderItem={item => (
           <List.Item
             actions={
-              status === 0 ? [<a key="list-loadmore-edit" onClick={complete(item)}>完成</a>,
-                <a key="list-loadmore-more" onClick={removeItem}>删除</a>] : []
-            }
-          >
+              status === 0
+                ? [
+                    <Button
+                      type='link'
+                      key='list-edit'
+                      onClick={complete.bind(this, item)}>
+                      完成
+                    </Button>,
+                    <Button
+                      type='link'
+                      key='list-more'
+                      onClick={removeListItem.bind(this, item)}>
+                      删除
+                    </Button>
+                  ]
+                : []
+            }>
             <Skeleton avatar title={false} loading={item.loading} active>
-              <List.Item.Meta title={item.title}/>
-              {status === 1 ? <div>content</div> : null}
+              <List.Item.Meta title={item.content} />
+              {status === 1 ? <div>{item.time}</div> : null}
             </Skeleton>
           </List.Item>
         )}
