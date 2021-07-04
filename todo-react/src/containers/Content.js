@@ -1,19 +1,28 @@
 import React from 'react'
 import TodoList from './TodoList'
 import AddTodo from './AddTodo'
-import { paddingLR20, siteLayoutBackground, textCenter } from '../commons/style'
+import {
+  paddingLR20,
+  siteLayoutBackground,
+  textCenter,
+  fontSize30
+} from '../commons/style'
+import { useSelector } from 'react-redux'
 
-const Content = props => {
-  const { list, status } = props
+const Content = () => {
+  const state = useSelector(state => state)
+  const { todos, status } = state
+  const list = todos.filter(item => item.status === 1)
   const showAdd = status === 2
+  const contentStyle = { ...siteLayoutBackground, paddingTop: '50px' }
   return (
-    <div style={siteLayoutBackground}>
+    <div style={contentStyle}>
       {showAdd ? (
-        <AddTodo {...props} />
+        <AddTodo />
       ) : (
         <div>
-          <div style={textCenter}>今日待完成任务</div>
-          <TodoList {...props} />
+          <div style={{ ...textCenter, ...fontSize30 }}>今日待完成任务</div>
+          <TodoList />
         </div>
       )}
       {status === 1 ? (

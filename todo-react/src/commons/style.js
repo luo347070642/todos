@@ -12,6 +12,7 @@ const marginAuto = {
 }
 const wrapperCol = { offset: 10, span: 14 }
 const paddingLR20 = { padding: '0 20%' }
+const fontSize30 = { fontSize: '30px' }
 export {
   fixHeight,
   background,
@@ -19,5 +20,6 @@ export {
   siteLayoutBackground,
   marginAuto,
   wrapperCol,
-  paddingLR20
+  paddingLR20,
+  fontSize30
 }

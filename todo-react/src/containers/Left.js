@@ -3,11 +3,17 @@ import { Menu, Button, Affix } from 'antd'
 import moment from 'moment'
 import { PlusOutlined } from '@ant-design/icons'
 import { textCenter } from '../commons/style'
+import { useDispatch, useSelector } from 'react-redux'
 
-const Left = props => {
-  const { status } = props
+export default function Left() {
+  const state = useSelector(state => state)
+  const { status } = state
+  const dispatch = useDispatch()
   const changeStatus = status => {
-    props.changeStatus(status)
+    dispatch({
+      type: 'CHANGE_STATUS',
+      status
+    })
   }
   const topStyle = { padding: '50px 0', ...textCenter }
   return (
@@ -41,5 +47,3 @@ const Left = props => {
     </div>
   )
 }
-
-export default Left

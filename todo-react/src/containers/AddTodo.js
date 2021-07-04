@@ -2,30 +2,27 @@ import React from 'react'
 import { Button, Form, Input, TimePicker } from 'antd'
 import { marginAuto, wrapperCol } from '../commons/style'
 import moment from 'moment'
+import { useDispatch } from 'react-redux'
 
 const AddTodo = props => {
+  const dispatch = useDispatch()
   const [form] = Form.useForm()
-  const { changeStatus, addList } = props
-  const onFinish = () => {}
-  const onFinishFailed = () => {}
   const returnPre = () => {
-    changeStatus(0)
+    dispatch({
+      type: 'CHANGE_STATUS',
+      status: 0
+    })
   }
   const submit = () => {
     const item = { ...form.getFieldValue() }
     item.time = moment(item.time).format('HH:mm')
-    addList(item)
-    changeStatus(0)
+    dispatch({ type: 'ADD_TODO', ...item })
+    returnPre()
   }
   const containerStyle = { ...marginAuto, paddingTop: '150px' }
   return (
     <div style={containerStyle}>
-      <Form
-        name='basic'
-        form={form}
-        layout='inline'
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}>
+      <Form name='basic' form={form} layout='inline'>
         <Form.Item
           label='设置任务'
           name='content'

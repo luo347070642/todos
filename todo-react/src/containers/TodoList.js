@@ -1,14 +1,29 @@
 import React from 'react'
 import { Button, List, Skeleton } from 'antd'
-import { paddingLR20 } from '../commons/style'
+import { useDispatch, useSelector } from 'react-redux'
+import { CheckOutlined } from '@ant-design/icons'
 
 const TodoList = props => {
-  const { list, status, changeStatus, removeListItem } = props
+  const state = useSelector(state => state)
+  const { status, todos } = state
+  let list = todos.filter(item => item.status === status)
+  const dispatch = useDispatch()
   const complete = item => {
-    changeStatus(1)
+    console.log('update')
+    dispatch({
+      type: 'UPDATE_TODO_STATUS',
+      item
+    })
   }
+  const removeListItem = item => {
+    dispatch({
+      type: 'REMOVE_TODO',
+      item
+    })
+  }
+  const todosStyle = { padding: '40px 20%' }
   return (
-    <div style={paddingLR20}>
+    <div style={todosStyle}>
       <List
         itemLayout='horizontal'
         dataSource={list}
@@ -34,7 +49,18 @@ const TodoList = props => {
             }>
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta title={item.content} />
-              {status === 1 ? <div>{item.time}</div> : null}
+              {status === 1 ? (
+                <div>
+                  {item.time}
+                  <CheckOutlined
+                    style={{
+                      marginLeft: '50px',
+                      color: 'green',
+                      fontSize: '20px'
+                    }}
+                  />
+                </div>
+              ) : null}
             </Skeleton>
           </List.Item>
         )}
