@@ -1,8 +1,6 @@
 import { createStore, combineReducers } from 'redux'
-import todos from './reducers/todos'
-import status from './reducers/status'
-const todoApp = combineReducers({
-  todos,
-  status
-})
+import reducers from './reducers/index'
+
+const todoApp = combineReducers(reducers)
+
 export default createStore(todoApp)
