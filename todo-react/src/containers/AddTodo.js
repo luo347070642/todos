@@ -3,15 +3,13 @@ import { Button, Form, Input, TimePicker } from 'antd'
 import { marginAuto, wrapperCol } from '../commons/style'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
+import { getContent } from '../store/actions'
 
 const AddTodo = props => {
   const dispatch = useDispatch()
   const [form] = Form.useForm()
   const returnPre = () => {
-    dispatch({
-      type: 'CHANGE_STATUS',
-      status: 0
-    })
+    dispatch(getContent(0))
   }
   const submit = () => {
     const item = { ...form.getFieldValue() }

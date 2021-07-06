@@ -4,8 +4,11 @@ import moment from 'moment'
 import { PlusOutlined } from '@ant-design/icons'
 import { textCenter } from '../commons/style'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 export default function Left() {
+  const history = useHistory()
+
   const state = useSelector(state => state)
   const { status } = state
   const dispatch = useDispatch()
@@ -14,6 +17,12 @@ export default function Left() {
       type: 'CHANGE_STATUS',
       status
     })
+    setTimeout(() => {
+      history.push('/')
+    }, 100)
+  }
+  const sendTodo = () => {
+    history.push('/addTodo')
   }
   const topStyle = { padding: '50px 0', ...textCenter }
   return (
@@ -40,7 +49,7 @@ export default function Left() {
           type='primary'
           shape='round'
           icon={<PlusOutlined />}
-          onClick={changeStatus.bind(this, 2)}>
+          onClick={sendTodo}>
           新建
         </Button>
       </Affix>
